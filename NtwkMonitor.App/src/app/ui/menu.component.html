@@ -1,0 +1,37 @@
+<div style="height:15vh">
+    <div class="border rounded border-dark text-center bg-secondary text-white mt-2 mb-2 p-2">
+        <span class="h5" i18n="@@menuHeader">NETWORK MONITOR</span>
+    </div>
+</div>
+<div style="height:80vh"
+    class="border rounded border-dark bg-secondary p-2"
+>
+    <button class="btn btn-block btn-outline-primary"
+        [class.active]="selection == 'main'"
+        [routerLink]="['/filteredView']"
+        i18n="@@menuMainButton"
+    >
+        Main
+    </button>
+    <button *ngIf="treeID == null" class="btn btn-block btn-outline-primary"
+        [class.active]="selection == 'editor'"
+        [routerLink]="['/treeView']"
+        i18n="@@menuEditorButton"
+    >
+        Editor
+    </button>
+    <button *ngIf="treeID != null" class="btn btn-block btn-outline-primary"
+        [class.active]="selection == 'editor'"
+        [routerLink]="['/treeView', treeID]"
+        i18n="@@menuEditorButton"
+    >
+        Editor
+    </button>
+    <button class="btn btn-block btn-outline-primary"
+        [class.active]="selection == 'about'"
+        [routerLink]="['/about']"
+        i18n="@@menuAboutButton"
+    >
+        About
+    </button>
+</div>

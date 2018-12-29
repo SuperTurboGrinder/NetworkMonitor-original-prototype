@@ -1,0 +1,288 @@
+
+<div class="row" style="height:100vh">
+    <div class="col-2">
+        <menu class="m-0 p-0" selection="main"></menu>
+    </div>
+    <div class="col-10">
+        <div style="height:18vh"
+            class="row border rounded border-dark text-center bg-secondary text-white mt-2 mb-2 mr-2 p-2"
+        >
+            <div class="col-4">
+                <div class="h5 align-self-end block"
+                    i18n="@@filteredViewTypeFilterLabel"
+                >
+                    Type filter
+                </div>
+                <select class="form-control m-1 ml-2 align-self-end"
+                    (change)="changeType($event.target.value)">
+                    <option *ngFor="let type of getTypes()" [selected]="type == selectedType"  value="{{type}}">{{ type }}</option>
+                </select>
+            </div>
+            <div class="col-5">
+                <div class="h5 align-self-end block"
+                    i18n="@@filteredViewNameFilterLabel"
+                >
+                    Name filter
+                </div>
+                <input 
+                    type="text"
+                    class="form-control m-1 ml-2 align-self-end"
+                    [value]="getNameFilter()"
+                    (change)="setNameFilter($event.target.value)"
+                >
+            </div>
+            <div class="col-3 text-right">
+                <div class="row m-0 p-0">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <span
+                            *ngIf="isSoundEnabled()"
+                            (click)="disableSound()"
+                            class="border border-dark btn btn-light text-primary text-center p-0 m-0"
+                            style="width:48px; height:48px; font-size:30px"
+                        >
+                            <i class="fa fa-volume-up m-0 p-0"></i>
+                        </span>
+                        <span
+                            *ngIf="!isSoundEnabled()"
+                            (click)="enableSound()"
+                            class="border border-dark btn btn-light text-warning text-center p-0 m-0"
+                            style="width:48px; height:48px; font-size:30px"
+                        >
+                            <i class="fa fa-volume-off m-0 p-0"></i>
+                        </span>
+                    </div>
+                    <div class="col-4">
+                        <span
+                            *ngIf="!isRunningUpadateForFilter()"
+                            (click)="updatePingForFilter()"
+                            class="border border-dark btn btn-light text-success text-center p-0 m-0"
+                            style="width:48px; height:48px; font-size:30px"
+                        >
+                            <i class="fa fa-refresh m-0 p-0"></i>
+                        </span>
+                        <span
+                            *ngIf="isRunningUpadateForFilter()"
+                            (click)="stopUpdateForFilter()"
+                            class="border border-dark btn btn-light text-success text-center p-0 m-0"
+                            style="width:48px; height:48px; font-size:30px"
+                        >
+                            <i class="fa fa-refresh fa-pulse m-0 p-0"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="row m-0 p-0">
+                    <div class="col-4 m-0 p-0"></div>
+                    <div class="col-8 m-0 p-0">
+                        <div class="form-inline">
+                            <input class="form-control m-0 ml-3 mr-1 p-0" type="checkbox"
+                                [checked]="isRepeatingPingOnFailure()"
+                                (change)="setRepeatPingOnFailure($event.target.checked)"
+                            >
+                            <span class="align-self-end"
+                                i18n="@@filteredViewFailRepeatLabel"
+                            >
+                                fail-repeat
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <strong>
+            <div style="width: calc( 100% - 2em )"
+                class="row border-bottom mb-3 ml-1"
+            >
+                <div class="col-3 border m-0 rounded-top sortable"
+                    [class.btn-light]="isSortedByName() == 0"
+                    [class.btn-secondary]="isSortedByName() != 0"
+                    (click)="setSortByName()"
+                >
+                    Name
+                    <span class="arrow-icon">
+                        <i *ngIf="isSortedByName() == 1" class="fa fa-sort-up m-0 p-0"></i>
+                        <i *ngIf="isSortedByName() == 2" class="fa fa-sort-down m-0 p-0"></i>
+                    </span>
+                </div>
+                <div class="col-9">
+                    <div class="row p-0 m-0">
+                        <div class="col-3 btn-light border m-0 rounded-top sortable"
+                            [class.btn-light]="isSortedByIP() == 0"
+                            [class.btn-secondary]="isSortedByIP() != 0"
+                            (click)="setSortByIP()"
+                        >
+                            IP Address
+                            <span class="arrow-icon">
+                                <i *ngIf="isSortedByIP() == 1" class="fa fa-sort-up m-0 p-0"></i>
+                                <i *ngIf="isSortedByIP() == 2" class="fa fa-sort-down m-0 p-0"></i>
+                            </span>
+                        </div>
+                        <div class="col-3 btn-light border m-0 rounded-top disabled nonselectable">Services</div>
+                        <div class="col-1 btn-light border m-0 p-1 rounded-top sortable"
+                            [class.btn-light]="isSortedByMinPing() == 0"
+                            [class.btn-secondary]="isSortedByMinPing() != 0"
+                            (click)="setSortByMinPing()"
+                        >
+                            <span *ngIf="isSortedByMinPing() == 0">Min</span>
+                            <span *ngIf="isSortedByMinPing() != 0">Mi</span>
+                            <span class="arrow-icon">
+                                <i *ngIf="isSortedByMinPing() == 1" class="fa fa-sort-up m-0 p-0"></i>
+                                <i *ngIf="isSortedByMinPing() == 2" class="fa fa-sort-down m-0 p-0"></i>
+                            </span>
+                        </div>
+                        <div class="col-1 btn-light border m-0 p-1 rounded-top sortable"
+                            [class.btn-light]="isSortedByAvgPing() == 0"
+                            [class.btn-secondary]="isSortedByAvgPing() != 0"
+                            (click)="setSortByAvgPing()"
+                        >
+                            <span *ngIf="isSortedByAvgPing() == 0">Avg</span>
+                            <span *ngIf="isSortedByAvgPing() != 0">Av</span>
+                            <span class="arrow-icon">
+                                <i *ngIf="isSortedByAvgPing() == 1" class="fa fa-sort-up m-0 p-0"></i>
+                                <i *ngIf="isSortedByAvgPing() == 2" class="fa fa-sort-down m-0 p-0"></i>
+                            </span>
+                        </div>
+                        <div class="col-1 btn-light border m-0 p-1 rounded-top sortable"
+                            [class.btn-light]="isSortedByMaxPing() == 0"
+                            [class.btn-secondary]="isSortedByMaxPing() != 0"
+                            (click)="setSortByMaxPing()"
+                        >
+                            <span *ngIf="isSortedByMaxPing() == 0">Max</span>
+                            <span *ngIf="isSortedByMaxPing() != 0">Ma</span>
+                            <span class="arrow-icon">
+                                <i *ngIf="isSortedByMaxPing() == 1" class="fa fa-sort-up m-0 p-0"></i>
+                                <i *ngIf="isSortedByMaxPing() == 2" class="fa fa-sort-down m-0 p-0"></i>
+                            </span>
+                        </div>
+                        <div class="col-1 btn-light border m-0 p-1 rounded-top disabled nonselectable">Num</div>
+                        <div class="col-2 text-center btn-light border m-0 rounded-top disabled nonselectable">Update</div>
+                    </div>
+                </div>
+            </div>
+        </strong>
+
+        <div style="height:65vh; overflow-y:scroll;">
+            <div *ngFor="let i of sortedIndexes;"
+                style="width: calc( 100% - 1em )"
+                class="row border-bottom ml-1"
+            >
+                <div class="col-3 p-0">
+                    <span
+                        class="border w-100 btn btn-primary text-dark text-center p-0 m-0"
+                        [routerLink]="['/treeView', node(i).id]"
+                        style="height:26px; font-size:16px"
+                    >
+                        <div class="row p-0 m-0">
+                            <span class="col-3 p-0 m-0">
+                                <span class="row p-0 m-0">
+                                    <i class="col-6 p-0 m-0 mt-1 fa fa-sitemap m-0 p-0"></i>
+                                    <span class="col-6 p-0 m-0" *ngIf="(numberOfChildren(i) | async); let num">[{{num}}]</span>
+                                </span>
+                            </span>
+                            <strong class="col-9 p-0 pl-1 m-0 text-left">{{node(i).name}}</strong>
+                        </div>
+                    </span>
+                </div>
+                <div *ngIf="node(i).isBlackBox" class="col-9 border-dark bg-dark text-white text-center">
+                    <strong i18n="@@BlackBox">Black Box</strong>
+                </div>
+                <div *ngIf="!node(i).isBlackBox" class="col-9 p-0 m-0">
+                    <div class="row p-0 m-0">
+                        <div class="col-3">
+                            {{node(i).ipStr}}
+                        </div>
+                        <div class="col-3">
+                            <span *ngIf="node(i).isOpenTelnet"
+                                class="border border-success btn btn-light text-center p-0 m-0"
+                                style="width:26px; height:26px; font-size:16px"
+                                (click)="runTelnetApp(node(i).id)"
+                            >
+                                <strong>T</strong>
+                            </span>
+                            <span *ngIf="node(i).isOpenSSH"
+                                class="border border-success btn btn-light text-center p-0 m-0"
+                                style="width:34px; height:26px; font-size:16px"
+                                (click)="runSSHApp(node(i).id)"
+                            >
+                                <strong>SSH</strong>
+                            </span>
+                            <span *ngIf="node(i).isOpenWeb"
+                                class="border border-success btn btn-light text-primary text-center p-0 m-0"
+                                style="width:26px; height:26px; font-size:16px"
+                                (click)="runWebApp(node(i).id)"
+                            >
+                                <i class="fa fa-internet-explorer m-0 p-0"></i>
+                            </span>
+                        </div>
+
+
+                        <div *ngIf="node(i).isOpenPing && (ping(i).init == false || ping(i).num == 0)"
+                            class="col-6 p-0 m-0">
+                            <div [class.font-weight-bold]="ping(i).init == true && ping(i).old == false"
+                                [class.text-danger]="ping(i).init == true"
+                                class="row p-0 m-0">
+                                <div class="col-2 text-center">--</div>
+                                <div class="col-2 text-center">--</div>
+                                <div class="col-2 text-center">--</div>
+                                <div class="col-2 text-center">0/4</div>
+                                <div class="col-4 text-center">
+                                    <span *ngIf="!isRunningUpadateForFilter() && (!ping(i).old)"
+                                        class="border border-dark btn btn-light text-success text-center p-0 m-0"
+                                        style="width:26px; height:26px; font-size:16px"
+                                        (click)="updatePing(i)">
+                                        <i class="fa fa-refresh m-0 p-0"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div *ngIf="node(i).isOpenPing && (ping(i).init && ping(i).num != 0)"
+                            class="col-6 p-0 m-0"
+                        >
+                            <div [class.font-weight-bold]="ping(i).old == false"
+                                class="row p-0 m-0">
+                                <div class="col-2 text-center text-success"
+                                    [class.text-warning]="ping(i).min > 10"
+                                    [class.text-danger]="ping(i).min > 30"
+                                    >{{ping(i).min}}</div>
+                                <div class="col-2 text-center text-success"
+                                    [class.text-warning]="ping(i).avg > 10"
+                                    [class.text-danger]="ping(i).avg > 30"
+                                    >{{ping(i).avg}}</div>
+                                <div class="col-2 text-center text-success"
+                                    [class.text-warning]="ping(i).max > 10"
+                                    [class.text-danger]="ping(i).max > 30"
+                                    >{{ping(i).max}}</div>
+                                <div class="col-2 text-center text-success"
+                                    [class.text-warning]="ping(i).num < 4"
+                                    >{{ping(i).num}}/4</div>
+                                <div class="col-4 text-center">
+                                    <span *ngIf="!isRunningUpadateForFilter() && (!ping(i).old)"
+                                        class="border border-dark btn btn-light text-success text-center p-0 m-0"
+                                        style="width:26px; height:26px; font-size:16px"
+                                        (click)="updatePing(i)">
+                                        <i class="fa fa-refresh m-0 p-0"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div *ngIf="!node(i).isOpenPing" class="col-6 p-0 m-0">
+                            <div class="row p-0 m-0">
+                                <div class="col-2 text-center">--</div>
+                                <div class="col-2 text-center">--</div>
+                                <div class="col-2 text-center">--</div>
+                                <div class="col-2 text-center">-/-</div>
+                                <div class="col-4 text-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

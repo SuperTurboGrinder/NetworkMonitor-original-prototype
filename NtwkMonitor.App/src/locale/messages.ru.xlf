@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="menuHeader" datatype="html">
+        <source>NETWORK MONITOR</source>
+        <target>МОНИТОР СЕТИ</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/menu.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuMainButton" datatype="html">
+        <source>
+        Main
+    </source>
+        <target>
+        Монитор
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/menu.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuEditorButton" datatype="html">
+        <source>
+        Editor
+    </source>
+        <target>
+        Редактор
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/menu.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/menu.component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="menuAboutButton" datatype="html">
+        <source>
+        About
+    </source>
+        <target>
+        Инфо
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/menu.component.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filteredViewTypeFilterLabel" datatype="html">
+        <source>
+                    Type filter
+                </source>
+        <target>
+                    Тип узла
+                </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/filteredView.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filteredViewNameFilterLabel" datatype="html">
+        <source>
+                    Name filter
+                </source>
+        <target>
+                    Фильтр по имени
+                </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/filteredView.component.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filteredViewFailRepeatLabel" datatype="html">
+        <source>
+                                fail-repeat
+                            </source>
+        <target>
+                                повторять
+                            </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/filteredView.component.ts</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="BlackBox" datatype="html">
+        <source>Black Box</source>
+        <target>Чёрный Ящик</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/filteredView.component.ts</context>
+          <context context-type="linenumber">188</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">146</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="treeViewCurrentNodeLabel" datatype="html">
+        <source>
+                    Current node:
+                </source>
+        <target>
+                    Этот узел:
+                </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="treeViewIPAddressLabel" datatype="html">
+        <source>
+                    IP address:
+                </source>
+        <target>
+                    IP адресс:
+                </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="treeViewRootLabel" datatype="html">
+        <source>Root</source>
+        <target>Корень</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">116</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="treeViewChildrenLabel" datatype="html">
+        <source>
+                        Children:
+                    </source>
+        <target>
+                        Узлы:
+                    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="treeViewEditModeLabel" datatype="html">
+        <source>Edit mode</source>
+        <target>редактир.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="treeViewAddButton" datatype="html">
+        <source>
+                    Add
+                </source>
+        <target>
+                    Добавить
+                </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="treeViewEditButton" datatype="html">
+        <source>
+                    Edit
+                </source>
+        <target>
+                    Изменить
+                </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">179</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="treeViewParentLabel" datatype="html">
+        <source>
+                        Parent
+                    </source>
+        <target>
+                        Родитель
+                    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="treeViewDeleteButton" datatype="html">
+        <source>
+                                Delete
+                            </source>
+        <target>
+                                Удалить
+                            </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/treeView.component.ts</context>
+          <context context-type="linenumber">189</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editorViewEditHeader" datatype="html">
+        <source>Edit </source>
+        <target>Редактирование </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editorViewCreateHeader" datatype="html">
+        <source>Create </source>
+        <target>Создание </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editorViewHeaderEnding" datatype="html">
+        <source>Network Node</source>
+        <target>узла сети</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editorViewNameLabel" datatype="html">
+        <source>Name</source>
+        <target>Имя</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editorViewNameRequiredMessge" datatype="html">
+        <source>
+                <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div&gt;"/>Name value is required.<x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/>
+            </source>
+        <target>
+                <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div&gt;"/>Введите имя узла.<x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/>
+            </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editorViewTypeLabel" datatype="html">
+        <source>Type</source>
+        <target>Тип</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editorViewIPRequiredMessage" datatype="html">
+        <source>
+                    <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div&gt;"/>IP value is required.<x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/>
+                </source>
+        <target>
+                    <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div&gt;"/>Введите IP адресс.<x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div&gt;"/>
+                </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editorViewOpenPingLabel" datatype="html">
+        <source>Open Ping</source>
+        <target>Открытый пинг</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editorViewServicesLabel" datatype="html">
+        <source>Services</source>
+        <target>Сервисы</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editorViewSaveButton" datatype="html">
+        <source>
+            Save
+        </source>
+        <target>
+            Сохранить
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editorViewCreateButton" datatype="html">
+        <source>
+            Create
+        </source>
+        <target>
+            Создать
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="editorViewCancelButton" datatype="html">
+        <source>
+            Cancel
+        </source>
+        <target>
+            Отмена
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/ui/nodeEditor.component.ts</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

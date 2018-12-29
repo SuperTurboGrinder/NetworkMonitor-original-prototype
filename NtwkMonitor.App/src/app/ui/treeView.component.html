@@ -1,0 +1,198 @@
+<div class="row" style="height:100vh">
+    <div class="col-2">
+        <menu class="m-0 p-0" selection="editor"></menu>
+    </div>
+    <div class="col-10">
+        <div style="height:18vh"
+            class="row border rounded border-dark text-center bg-secondary text-white mt-2 mb-2 mr-2 p-2"
+        >
+            <div class="col-2 m-0 p-0 text-dark text-left">
+                <div class="h5" i18n="@@treeViewCurrentNodeLabel">
+                    Current node:
+                </div>
+                <div class="h5" i18n="@@treeViewIPAddressLabel">
+                    IP address:
+                </div>
+            </div>
+            <div *ngIf="currentNode!=null"
+                class="col-2 m-0 p-0 text-left"
+            >
+                <div class="h5">{{currentNode.name}}</div>
+                <div *ngIf="currentNode.isBlackBox == false"
+                    class="h5"
+                >{{currentNode.ipStr}}</div>
+                <div *ngIf="currentNode.isBlackBox == true"
+                    class="h5 text-dark"
+                    i18n="@@BlackBox"
+                >Black Box</div>
+            </div>
+            <div *ngIf="currentNode == null && children.length == 0"
+                class="col-2 m-0 p-0 text-left"
+            >
+                <div class="h5">----</div>
+                <div class="h5">----</div>
+            </div>
+            <div *ngIf="currentNode == null && children.length != 0"
+                class="col-2 m-0 p-0 text-left"
+            >
+                <div class="h5" i18n="@@treeViewRootLabel">Root</div>
+                <div class="h5">----</div>
+            </div>
+            <div class="col-2">
+                <div class="h5">
+                    <span class="text-dark mr-2" i18n="@@treeViewChildrenLabel">
+                        Children:
+                    </span>
+                    {{children.length}}
+                </div>
+                <div class="form-inline">
+                    <input class="form-control m-0 ml-1 mr-1 p-0" type="checkbox"
+                    [value]="isInEditMode()"
+                    (change)="setEditMode($event.target.checked)"
+                    >
+                    <span class="h6 text-dark" i18n="@@treeViewEditModeLabel">Edit mode</span>
+                </div>
+            </div>
+            <div class="col-2 text-left">
+                <div *ngIf="currentNode == null"
+                    class="border btn p-0 pl-1 pr-1 w-100 btn-success"
+                    [routerLink]="['/nodeEditor/addToRoot']"
+                    i18n="@@treeViewAddButton"
+                >
+                    Add
+                </div>
+                <div *ngIf="currentNode != null"
+                    class="border btn p-0 pl-1 pr-1 w-100 btn-success"
+                    [routerLink]="['/nodeEditor/addTo', currentNode.id]"
+                    i18n="@@treeViewAddButton"
+                >
+                    Add
+                </div>
+                <div *ngIf="currentNode != null && isInEditMode()"
+                    class="border btn p-0 pr-3 pl-3 m-0 w-100 btn-warning"
+                    [routerLink]="['/nodeEditor', currentNode.id]"
+                    i18n="@@treeViewEditButton"
+                >
+                    Edit
+                </div>
+            </div>
+            <div *ngIf="currentNode!=null"
+                class="col-4 m-0 p-0 text-dark text-left"
+            >
+                <div class="row m-0 p-0">
+                    <div class="col-10 p-0 m-0 mb-1 h5"
+                        i18n="@@treeViewParentLabel"
+                    >
+                        Parent
+                    </div>
+                    <div class="col-2 p-0 m-0">
+                        <div *ngIf="currentNode != null && currentNode.parent != null"
+                            class="border w-100 btn btn-dark text-center p-0 m-0"
+                            [routerLink]="['/treeView']"
+                            style="height:26px; font-size:16px"
+                        >
+                            <span class="col-3 p-0 m-0"><i class="fa fa-sitemap m-0 p-0"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="currentNode != null && currentNode.parent != null"
+                    class="border w-100 btn btn-dark text-center p-0 m-0"
+                    [routerLink]="['/treeView', currentNode.parent.id]"
+                    style="height:26px; font-size:16px">
+                    <div *ngIf="currentNode.parent != null" class="row p-0 m-0">
+                        <span class="col-3 p-0 m-0"><i class="fa fa-arrow-left m-0 p-0"></i></span>
+                        <strong class="col-9 p-0 pl-1 m-0 text-center">{{currentNode.parent.name}}</strong>
+                    </div>
+                </div>
+                <div *ngIf="currentNode != null && currentNode.parent == null"
+                    class="border w-100 btn btn-dark text-center p-0 m-0"
+                    [routerLink]="['/treeView']"
+                    style="height:26px; font-size:16px"
+                >
+                    <div class="row p-0 m-0">
+                        <span class="col-3 p-0 m-0"><i class="fa fa-sitemap m-0 p-0"></i></span>
+                        <strong class="col-9 p-0 pl-1 m-0 text-center"
+                            i18n="@@treeViewRootLabel"
+                        >
+                            Root
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="height:75vh; overflow-y:scroll;">
+            <div *ngFor="let node of children"
+                style="width: calc( 100% - 1em )"
+                class="row border-bottom ml-1"
+            >
+                <div class="col-3 p-0">
+                    <span
+                        class="border w-100 btn btn-primary text-dark text-center p-0 m-0"
+                        [routerLink]="['/treeView', node.id]"
+                        style="height:26px; font-size:16px"
+                    >
+                        <div class="row p-0 m-0">
+                            <span class="col-3 p-0 m-0">
+                                <span class="row p-0 m-0">
+                                    <i class="col-6 p-0 m-0 mt-1 fa fa-sitemap m-0 p-0"></i>
+                                    <span class="col-6 p-0 m-0" *ngIf="(numberOfChildren(node.id) | async); let num">[{{num}}]</span>
+                                </span>
+                            </span>
+                            <strong class="col-9 p-0 pl-1 m-0 text-left">{{node.name}}</strong>
+                        </div>
+                    </span>
+                </div>
+                <div *ngIf="node.isBlackBox == true" class="col-5 border-dark bg-dark text-white text-center">
+                    <strong i18n="@@BlackBox">Black Box</strong>
+                </div>
+                <div *ngIf="node.isBlackBox == false" class="col-5 p-0 m-0">
+                    <div class="row p-0 m-0">
+                        <div class="col-6">
+                            {{node.ipStr}}
+                        </div>
+                        <div class="col-6">
+                            <div class="nonselectable">
+                                <span class="badge badge-pill badge-secondary"
+                                    [class.badge-success]="node.isOpenTelnet == true"
+                                ><strong>T</strong></span>
+                                <span class="badge badge-pill badge-secondary"
+                                    [class.badge-success]="node.isOpenSSH == true"
+                                ><strong>SSH</strong></span>
+                                <span class="badge badge-pill badge-secondary"
+                                    [class.badge-success]="node.isOpenWeb == true"
+                                ><i class="fa fa-internet-explorer m-0 p-0"></i></span>
+                                <span class="badge badge-pill badge-secondary"
+                                    [class.badge-success]="node.isOpenPing == true"
+                                ><strong>P</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 p-0 m-0">
+                    <div class="row p-0 m-0">
+                        <div *ngIf="isInEditMode()"
+                            class="col-6 text-right"
+                        >
+                            <span class="border btn p-0 pr-3 pl-3 m-0 btn-warning"
+                                [routerLink]="['/nodeEditor', node.id]"
+                                i18n="@@treeViewEditButton"
+                            >
+                                Edit
+                            </span>
+                        </div>
+                        <div *ngIf="isInEditMode() && (numberOfChildren(node.id) | async) === 0"
+                            class="col-6"
+                        >
+                            <span class="border btn p-0 pr-3 pl-3 m-0  btn-danger"
+                                (click)="delete(node)"
+                                i18n="@@treeViewDeleteButton"
+                            >
+                                Delete
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

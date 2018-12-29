@@ -1,0 +1,116 @@
+<div class="ng-primary border p-3 rounded"
+    [class.bg-warning]="editing === true"
+    [class.bg-primary]="editing === false"
+>
+    <span class="h4">
+        <span *ngIf="editing == true" i18n="@@editorViewEditHeader">Edit </span>
+        <span *ngIf="editing == false" i18n="@@editorViewCreateHeader">Create </span>
+        <span i18n="@@editorViewHeaderEnding">Network Node</span>
+    </span>
+</div>
+<form *ngIf="node != null" novalidate #form="ngForm" (ngSubmit)="save(form)" validate>
+    <div class="row">
+        <div class="col-3 form-group">
+            <label i18n="@@editorViewNameLabel">Name</label>
+            <input class="form-control" #name="ngModel" name="name" [(ngModel)]="node.name" minlength="2" required />
+            <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                class="text-small text-danger"
+                i18n="@@editorViewNameRequiredMessge"
+            >
+                <div *ngIf="name.errors.required">Name value is required.</div>
+            </div>
+        </div>
+        <div class="col-3 form-group">
+            <label i18n="@@editorViewTypeLabel">Type</label>
+            <select class="form-control"
+                [class.ng-invalid]="node.type == -1"
+                (change)="changeType($event.target.value)">
+                <option *ngIf="node.type == -1" selected value="----">----</option>
+                <option *ngFor="let type of types; let i = index" [selected]="i == node.type"  value="{{type}}">{{ type }}</option>
+            </select>
+        </div>
+        <div class="col-6"></div>
+    </div>
+    <div class="form-inline w-100 pb-2" [class.border-bottom]="node.isBlackBox == false">
+        <input class="form-control ml-2 mr-2" type="checkbox"
+            name="isBlackBox" [(ngModel)]="node.isBlackBox"
+        >
+        <label i18n="@@BlackBox">Black Box</label>
+    </div>
+    <div  *ngIf="node.isBlackBox == false">
+        <div class="row mt-2 mb-2">
+            <div class="col-3 ml-1 form-inline" 
+            >
+                <label>IP</label>
+                <input type="text" class="ml-2 form-control" #ipStr="ngModel" name="ipStr" ipvalidator [(ngModel)]="node.ipStr" required />
+                <div *ngIf="ipStr.invalid && (ipStr.dirty || ipStr.touched)"
+                    class="text-small text-danger"
+                    i18n="@@editorViewIPRequiredMessage"
+                >
+                    <div *ngIf="ipStr.errors.required">IP value is required.</div>
+                </div>
+            </div>
+            <div class="col-3 form-inline pb-2">
+                <input class="form-control ml-2 mr-2" type="checkbox"
+                    name="isOpenPing" [(ngModel)]="node.isOpenPing"
+                >
+                <label i18n="@@editorViewOpenPingLabel">Open Ping</label>
+            </div>
+            <div class="col-6"></div>
+        </div>
+        <label class="ml-1" i18n="@@editorViewServicesLabel">Services</label>
+        <div class="row mb-2">
+            <div class="col-2 form-inline pb-2">
+                <input class="form-control ml-2 mr-2" type="checkbox"
+                    name="isOpenTelnet" [(ngModel)]="node.isOpenTelnet"
+                >
+                <label>Telnet</label>
+            </div>
+            <div class="col-2 form-inline pb-2">
+                <input class="form-control ml-2 mr-2" type="checkbox"
+                    name="isOpenSSH" [(ngModel)]="node.isOpenSSH"
+                >
+                <label>SSH</label>
+            </div>
+            <div class="col-2 form-inline pb-2">
+                <input class="form-control ml-2 mr-2" type="checkbox"
+                    name="isOpenWeb" [(ngModel)]="node.isOpenWeb"
+                >
+                <label>Web</label>
+            </div>
+            <div class="col-6"></div>
+        </div>
+    </div>
+    <div *ngIf="form.submitted == false" class="p-0 m-0">
+        <button *ngIf="editing == true"
+            [disabled]="form.form.valid == false || node.type == -1"
+            type="submit" class="btn btn-primary"
+            [class.btn-warning]="editing"
+            i18n="@@editorViewSaveButton"
+        >
+            Save
+        </button>
+        <button *ngIf="editing == false"
+            [disabled]="form.form.valid == false || node.type == -1"
+            type="submit" class="btn btn-primary"
+            [class.btn-warning]="editing"
+            i18n="@@editorViewCreateButton"
+        >
+            Create
+        </button>
+        <button *ngIf="node.id != 0" 
+            type="reset"
+            class="btn btn-secondary"
+            [routerLink]="['/treeView', node.id]"
+            i18n="@@editorViewCancelButton"
+        >
+            Cancel
+        </button>
+        <button *ngIf="node.id == 0 && parentID == null" type="reset" class="btn btn-secondary" [routerLink]="['/treeView']" i18n="@@editorViewCancelButton">
+            Cancel
+        </button>
+        <button *ngIf="node.id == 0 && parentID != null" type="reset" class="btn btn-secondary" [routerLink]="['/treeView', parentID]" i18n="@@editorViewCancelButton">
+            Cancel
+        </button>
+    </div>
+</form>

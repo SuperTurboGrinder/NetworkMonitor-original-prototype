@@ -1,0 +1,24 @@
+For V2
+1) authorization for for app and api
+2) api for creating different networks and
+switching between them
+3) each network can be devided on named subsets
+containing groups of nodes
+4) electron app with html5 webview for app
+(to be able to host and update app on remote server
+without rebuilding client and have stable running
+browser without reloading and unloading tabs)
+5) working caching on client with sorting and subsets
+(observable for input,
+map to -> cached observable for cached input,
+map to -> cached observables for different sorting
+map to -> cached observables for subsets)
+6) real time timed checks with chart
+(can be set to subset in configuration)
+7) editor for networks and subsets
+8) configuring default network, subset and other values
+9) skip children if can't ping current node
+(make ping cache into a tree,
+make checks for every level before going to the next,
+on failed ping propagating unreachable status
+down the tree (and skipping if scheduled))
